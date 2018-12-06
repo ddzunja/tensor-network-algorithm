@@ -1,5 +1,5 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+# graph coloring solver
+# via local search (initial version)
 
 import random
 
