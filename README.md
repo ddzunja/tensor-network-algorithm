@@ -10,3 +10,14 @@ Mahmud Allahverdiyev - Data Science Msc. 1st year student
 Dejan Dzunja - Data Science Msc. 1st year student
 Mohammad Ali Sadri - Data Science Msc. 1st year student
 Woong-seon - Data Science Msc. 1st year student
+
+
+
+## Implementation of graph coloring based on heuristic methods in Python
+    The following methods have been used:
+    - Local search
+    - greedy heuristic (logarithmic upper bound)
+    - set cover based approach
+    - bipartite coloring
+
+## C++ optimum solver for mini graphs  
