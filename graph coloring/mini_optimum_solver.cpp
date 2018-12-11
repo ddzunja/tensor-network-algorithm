@@ -6,6 +6,11 @@
 //  Copyright © 2018 Mahmud. All rights reserved.
 //
 
+/*
+ O(3^N) deterministic algorithm to find
+    optimal graph coloring.
+ */
+
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
@@ -77,9 +82,11 @@ bool independent[1 << MAX_VERTICES];
 int maskBitCount[1 << MAX_VERTICES];
 int maxIndependentSubsets[1 << MAX_VERTICES];
 
-int main() {
-    string filename = "./data/gc_4_1";
-    freopen(filename.c_str(), "r", stdin);
+int main(int argv, char** argc) {
+    char* filename = argc[1];
+    //filename = "./data/gc_4_1";
+    //freopen(filename.c_str(), "r", stdin);
+    freopen(filename, "r", stdin);
     
     cin >> N >> M;
     G.resize(N);
@@ -90,13 +97,12 @@ int main() {
         G[v].push_back(u);
         adjacency[u][v] = 1;
         adjacency[v][u] = 1;
-        cout << "edge: " << u << " " << v << endl;
     }
     if (N > 20) {
-        cout << "Exponential solution does not work" << endl;
+        cout << "Exponential solution will not work" << endl;
+        cout << "Of course, you can keep it running until your resources or patience run out" << endl;
         return 0;
     }
-    cout << N << endl;
     for (int i = 0; i < (1 << N); i ++) {
         independent[i] = true;
         for (int j = 0; j < N && independent[i]; j ++) {
@@ -111,9 +117,7 @@ int main() {
                 }
             }
         }
-        cout << i << " --> " << independent[i] << endl;
     }
-    cout << endl;
     maskBitCount[0] = 0;
     for (int mask = 1; mask < (1 << N); mask ++) {
         for (int bit = 0; bit < N; bit ++) {
@@ -131,7 +135,7 @@ int main() {
         }
     }
     dp[0] = 0;
-    for (int mask = 1; mask < (1 << N); mask ++) { // iterating over all submasks
+    for (int mask = 1; mask < (1 << N); mask ++) { // submask enumeration
         dp[mask] = N + 1;
         for (int sub = mask; sub > 0; sub = (sub - 1) & mask) {
             if (maxIndependentSubsets[mask] == maxIndependentSubsets[sub]
@@ -139,7 +143,7 @@ int main() {
             dp[mask] = min(dp[mask], 1 + dp[mask ^ sub]);
         }
     }
-    cout << dp[(1 << N) - 1] << endl;
+    cout << "chromatic number is equal to " << dp[(1 << N) - 1] << endl;
     
     return 0;
 }
