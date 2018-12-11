@@ -32,7 +32,7 @@ def check_optimize(node_count, graph, colors):
     
     
 def find_mincolor(graph, colors, node):
-    available = range(0, len(graph[node]) + 2)
+    available = list(range(0, len(graph[node]) + 2))
     for i in graph[node]:
         if colors[i] != -1 and colors[i] <= len(graph[node]) + 1:
             available[colors[i]] = -1
@@ -113,7 +113,7 @@ def max_violator(node_count, graph, colors):
 def local_search(node_count, graph):
     trials = 50
     for tr in range(trials):
-        colors = range(0, node_count)
+        colors = list(range(0, node_count))
         for i in range(node_count):
             colors[i] = random.randint(0, 6)
         for i in range(12345):
@@ -132,7 +132,7 @@ def find_setcover(node_count, graph, used_nodes):
     
     trials = 20
     best_set = []
-    ids = range(0, node_count)
+    ids = list(range(0, node_count))
     for tr in range(trials):
         current_set = []
         random.shuffle(ids)
@@ -261,9 +261,9 @@ def solve_it(input_data):
     for i in range(node_count):
         for j in graph[i]:
             adj_matrix[i][j] = 1
-    
-    print(local_search(node_count, graph))
-    exit(0)
+
+    # may call local search as well
+    #print(local_search(node_count, graph))
     
     solution = greedycoloring(node_count, graph)
     hs_colors = heuristic_on_colors(node_count, graph)
@@ -291,4 +291,3 @@ if __name__ == '__main__':
         print(solve_it(input_data))
     else:
         print('This test requires an input file.  Please select one from the data directory. (i.e. python solver.py ./data/gc_4_1)')
-
