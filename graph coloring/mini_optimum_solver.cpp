@@ -7,10 +7,16 @@
 //
 
 #include <iostream>
+#include <cstdlib>
+#include <cstdio>
+#include <cmath>
 #include <cstring>
+#include <algorithm>
 #include <vector>
 
 using namespace std;
+
+#pragma GCC optimize("-0g")
 
 template <class T>
 void fastInput(T &N) {
@@ -47,23 +53,89 @@ template<class T> void fastPrint(T n){
     putchar_unlocked(buffer[i]);
     putchar_unlocked('\n');
 }
+void maximize(int &a, int b) {
+    if (a < b) {
+        a = b;
+    }
+}
+void minimize(int &a, int b) {
+    if (a > b) {
+        a = b;
+    }
+}
 
-typedef vector<vector<int>> graph;
+typedef vector<vector<int> > graph;
+
+const int MAX_VERTICES = 20;
 
 int N, M;
 graph G;
+int adjacency[MAX_VERTICES][MAX_VERTICES];
+int dp[1 << MAX_VERTICES];
+
+bool independent[1 << MAX_VERTICES];
+int maskBitCount[1 << MAX_VERTICES];
+int maxIndependentSubsets[1 << MAX_VERTICES];
 
 int main() {
     string filename = "./data/gc_4_1";
-    freopen(filename, "r", stdin);
+    freopen(filename.c_str(), "r", stdin);
     
     cin >> N >> M;
     G.resize(N);
     for (int i = 0; i < M; i ++) {
         int u, v;
         cin >> u >> v;
-        
+        G[u].push_back(v);
+        G[v].push_back(u);
+        adjacency[u][v] = 1;
+        adjacency[v][u] = 1;
     }
+    if (N > 20) {
+        cout << "Exponential solution does not work" << endl;
+        return 0;
+    }
+    for (int i = 0; i < (1 << N); i ++) {
+        bool independent[i] = true;
+        for (int j = 0; j < N && independent[i]; j ++) {
+            if (i & (1 << j)) {
+                for (int k = j + 1; k < N; k ++) {
+                    if (i & (1 << k)) {
+                        if (adjacency[i][j]) {
+                            independent[i] = false;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    maskBitCount[0] = 0;
+    for (int mask = 1; mask < (1 << N); mask ++) {
+        for (int bit = 0; bit < N; bit ++) {
+            if (mask & (1 << bit)) {
+                maskBitCount[mask] = maskBitCount[mask ^ (1 << bit)] + 1;
+                break;
+            }
+        }
+    }
+    for (int i = 0; i < (1 << N); i ++) {
+        for (int j = i; j > 0; j = (j - 1) & i) {
+            if (independent[j]) {
+                maximize(maxIndependentSubsets[i], maxIndependentSubsets[j]);
+            }
+        }
+    }
+    dp[0] = 0;
+    for (int mask = 1; mask < (1 << N); mask ++) { // iterating over all submasks
+        dp[i] = N + 1;
+        for (int sub = i; sub > 0; su = (mask - 1) & i) {
+            if (maxIndependentSubsets[mask] == maxIndependentSubsets[sub])
+            dp[mask] = min(dp[mask], 1 + dp[mask ^ sub]);
+        }
+    }
+    cout << dp[(1 << N) - 1] << endl;
     
+    return 0;
 }
 

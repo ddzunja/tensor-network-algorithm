@@ -20,4 +20,7 @@ Woong-seon - Data Science Msc. 1st year student
     - set cover based approach
     - bipartite coloring
 
-## C++ optimum solver for mini graphs  
+## C++ optimum solver for mini graphs
+ - Assuming the number of vertices < 25
+ - to compile the solver in C++11 use command: make make mini_optimum_solver
+ - to run on the specified data file: ./mini_optimum_solver
