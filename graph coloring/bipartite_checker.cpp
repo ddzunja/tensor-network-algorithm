@@ -72,12 +72,13 @@ void dfs(int node, int parent, int c) {
         return;
     }
     colors[node] = c;
-    for (int neighbor: G[node]) {
+    for (int i = 0; i < (int)G[node].size(); i ++) {
+        int neighbor = G[node][i];
         if (colors[neighbor] == c) {
             cycle = true;
             break;
         }
-        dfs(i, node, c);
+        dfs(neighbor, node, 1 - c);
     }
 }
 
@@ -98,7 +99,7 @@ int main(int argv, char** argc) {
     colors = vector<int>(N, -1);
     for (int i = 0; i < N; i ++) {
         if (colors[i] == -1) {
-            dfs(i, 0);
+            dfs(i, -1, 0);
         }
     }
     if (cycle) {
