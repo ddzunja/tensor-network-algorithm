@@ -90,18 +90,20 @@ int main() {
         G[v].push_back(u);
         adjacency[u][v] = 1;
         adjacency[v][u] = 1;
+        cout << "edge: " << u << " " << v << endl;
     }
     if (N > 20) {
         cout << "Exponential solution does not work" << endl;
         return 0;
     }
+    cout << N << endl;
     for (int i = 0; i < (1 << N); i ++) {
-        bool independent[i] = true;
+        independent[i] = true;
         for (int j = 0; j < N && independent[i]; j ++) {
             if (i & (1 << j)) {
                 for (int k = j + 1; k < N; k ++) {
                     if (i & (1 << k)) {
-                        if (adjacency[i][j]) {
+                        if (adjacency[j][k]) {
                             independent[i] = false;
                             break;
                         }
@@ -109,7 +111,9 @@ int main() {
                 }
             }
         }
+        cout << i << " --> " << independent[i] << endl;
     }
+    cout << endl;
     maskBitCount[0] = 0;
     for (int mask = 1; mask < (1 << N); mask ++) {
         for (int bit = 0; bit < N; bit ++) {
@@ -122,15 +126,16 @@ int main() {
     for (int i = 0; i < (1 << N); i ++) {
         for (int j = i; j > 0; j = (j - 1) & i) {
             if (independent[j]) {
-                maximize(maxIndependentSubsets[i], maxIndependentSubsets[j]);
+                maximize(maxIndependentSubsets[i], maskBitCount[j]);
             }
         }
     }
     dp[0] = 0;
     for (int mask = 1; mask < (1 << N); mask ++) { // iterating over all submasks
-        dp[i] = N + 1;
-        for (int sub = i; sub > 0; su = (mask - 1) & i) {
-            if (maxIndependentSubsets[mask] == maxIndependentSubsets[sub])
+        dp[mask] = N + 1;
+        for (int sub = mask; sub > 0; sub = (sub - 1) & mask) {
+            if (maxIndependentSubsets[mask] == maxIndependentSubsets[sub]
+                && maxIndependentSubsets[sub] == maskBitCount[sub])
             dp[mask] = min(dp[mask], 1 + dp[mask ^ sub]);
         }
     }
