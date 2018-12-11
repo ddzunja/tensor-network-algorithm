@@ -6,11 +6,6 @@
 //  Copyright © 2018 Mahmud. All rights reserved.
 //
 
-/*
- O(3^N) deterministic algorithm to find
- optimal graph coloring.
- */
-
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
@@ -18,6 +13,7 @@
 #include <cstring>
 #include <algorithm>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -78,12 +74,56 @@ void dfs(int node, int parent, int c) {
             cycle = true;
             break;
         }
-        dfs(neighbor, node, 1 - c);
+        if (colors[neighbor] == -1) {
+            dfs(neighbor, node, 1 - c);
+        }
     }
+}
+bool bipartiteColorableviaDFS(graph G) {
+    cycle = false;
+    colors = vector<int>(N, -1);
+    for (int i = 0; i < N; i ++) {
+        if (colors[i] == -1) {
+            dfs(i, -1, 0);
+        }
+    }
+    return cycle;
+}
+bool bipartiteColorableviaBFS(graph G) {
+    bool cycle = false;
+    colors = vector<int>(N, -1);
+    for (int i = 0; i < N; i ++) {
+        if (cycle == true) {
+            break;
+        }
+        if (colors[i] != -1) {
+            continue;
+        }
+        queue<int> Q;
+        colors[i] = 0;
+        Q.push(i);
+        while (!Q.empty()) {
+            int current = Q.front();
+            Q.pop();
+            for (int j = 0; j < (int)G[current].size(); j ++) {
+                int neighbor = G[current][neighbor];
+                if (colors[neighbor] == colors[current]) {
+                    cycle = true;
+                    break;
+                }
+                if (colors[neighbor] == -1) {
+                    colors[neighbor] = colors[current] ^ 1;
+                    Q.push(neighbor);
+                }
+            }
+        }
+    }
+    return cycle;
 }
 
 int main(int argv, char** argc) {
     char* filename = argc[1];
+    char* method = argc[2];
     //filename = "./data/gc_4_1";
     //freopen(filename.c_str(), "r", stdin);
     freopen(filename, "r", stdin);
@@ -96,16 +136,21 @@ int main(int argv, char** argc) {
         G[u].push_back(v);
         G[v].push_back(u);
     }
-    colors = vector<int>(N, -1);
-    for (int i = 0; i < N; i ++) {
-        if (colors[i] == -1) {
-            dfs(i, -1, 0);
-        }
+    string sm(method);
+    transform(sm.begin(), sm.end(), sm.begin(), ::toupper);
+    //cout << sm << endl;
+    
+    
+    if (sm == "DFS") {
+        cycle = bipartiteColorableviaDFS(G);
+    }
+    else {
+        cycle = bipartiteColorableviaBFS(G);
     }
     if (cycle) {
-        cout << "graph can not be bicolored due to odd cycle" << endl;
+        cout << "Graph can not be bicolored due to odd cycle." << endl;
     } else {
-        cout << "graph is bicolorable" << endl;
+        cout << "Graph is bicolorable." << endl;
 //        for (int i = 0; i < N; i ++) {
 //            cout << "color of node i = " << i << " is " << colors[i] << endl;
 //        }
