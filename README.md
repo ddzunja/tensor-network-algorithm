@@ -21,6 +21,7 @@ Woong-seon - Data Science Msc. 1st year student
     - bipartite coloring
 
 ## C++ optimum solver for mini graphs
- - Assuming the number of vertices < 25
- - to compile the solver in C++11 use command: make make mini_optimum_solver
- - to run on the specified data file: ./mini_optimum_solver
+    -  Assuming the number of vertices < 20
+    - Complexity of calculating chromatic number is O(3^N)
+    - to compile the solver in C++11 use command: make make mini_optimum_solver
+    - to run the specified data file use command: ./mini_optimum_solver graph_file
