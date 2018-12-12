@@ -23,6 +23,16 @@ Woong-seon - Data Science Msc. 1st year student
 ## C++ optimum solver for mini graphs
     - Assuming the number of vertices < 20
     - Complexity of calculating chromatic number is O(3^N)
+<<<<<<< Updated upstream
     - Memory complexity of calculating the coloring itself is O(2^N)
     - to compile the solver in C++11 use command: make mini_optimum_solver
     - to run the specified data file use command: ./mini_optimum_solver graph_file
+=======
+    - To compile the solver in C++11 use command: make mini_optimum_solver
+    - To run the specified data file use command: ./mini_optimum_solver graph_file
+
+## C++ bipartite graph checker
+    - linear time algorithm to check if chromatic number is 2
+    - Depth search routines are used to verify bipartiteness of the graph
+    - The outlining method can be replaced by BFS alsgorithm as well.
+>>>>>>> Stashed changes
