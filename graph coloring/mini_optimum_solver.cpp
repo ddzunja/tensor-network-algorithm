@@ -58,16 +58,6 @@ template<class T> void fastPrint(T n){
     putchar_unlocked(buffer[i]);
     putchar_unlocked('\n');
 }
-void maximize(int &a, int b) {
-    if (a < b) {
-        a = b;
-    }
-}
-void minimize(int &a, int b) {
-    if (a > b) {
-        a = b;
-    }
-}
 
 typedef vector<vector<int> > graph;
 
@@ -81,6 +71,19 @@ int dp[1 << MAX_VERTICES];
 bool independent[1 << MAX_VERTICES];
 int maskBitCount[1 << MAX_VERTICES];
 int maxIndependentSubsets[1 << MAX_VERTICES];
+int parent[1 << MAX_VERTICES];
+
+void maximize(int &a, int b) {
+    if (a < b) {
+        a = b;
+    }
+}
+void minimize(int &a, int b) {
+    if (a > b) {
+        a = b;
+    }
+}
+
 
 int main(int argv, char** argc) {
     char* filename = argc[1];
@@ -130,7 +133,11 @@ int main(int argv, char** argc) {
     for (int i = 0; i < (1 << N); i ++) {
         for (int j = i; j > 0; j = (j - 1) & i) {
             if (independent[j]) {
-                maximize(maxIndependentSubsets[i], maskBitCount[j]);
+                //maximize(maxIndependentSubsets[i], maskBitCount[j]);
+                if (maskBitCount[j] > maxIndependentSubsets[i]) {
+                    maxIndependentSubsets[i] = maskBitCount[j];
+                    parent[i] = j;
+                }
             }
         }
     }
@@ -145,6 +152,26 @@ int main(int argv, char** argc) {
     }
     cout << "chromatic number is equal to " << dp[(1 << N) - 1] << endl;
     
+    
+    vector<int> path;
+    vector<int> colors(N);
+    int current = (1 << N) - 1;
+    int activeColor = 0;
+    while (current > 0) {
+        cout << "current = " << current << " vs " << parent[current] << endl;
+        int activeSet = parent[current];
+        for (int i = 0; i < N; i ++) {
+            if (activeSet & (1 << i)) {
+                colors[i] = activeColor;
+            }
+        }
+        current = current ^ parent[current];
+        activeColor ++;
+    }
+    cout << "Assigned colors in optimal coloring is:" << endl;
+    for (int i = 0; i < N; i ++) {
+        cout << "color of node " << i << " gets color " << colors[i] << endl;
+    }
+    
     return 0;
 }
-
