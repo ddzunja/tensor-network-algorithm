@@ -153,12 +153,13 @@ int main(int argv, char** argc) {
     cout << "chromatic number is equal to " << dp[(1 << N) - 1] << endl;
     
     
+    // recovering the optimal setting of colors
+    
     vector<int> path;
     vector<int> colors(N);
     int current = (1 << N) - 1;
     int activeColor = 0;
     while (current > 0) {
-        cout << "current = " << current << " vs " << parent[current] << endl;
         int activeSet = parent[current];
         for (int i = 0; i < N; i ++) {
             if (activeSet & (1 << i)) {
@@ -170,7 +171,7 @@ int main(int argv, char** argc) {
     }
     cout << "Assigned colors in optimal coloring is:" << endl;
     for (int i = 0; i < N; i ++) {
-        cout << "color of node " << i << " gets color " << colors[i] << endl;
+        cout << "color of node " << i << " is " << colors[i] << endl;
     }
     
     return 0;
