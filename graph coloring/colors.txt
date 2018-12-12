@@ -1,0 +1,11 @@
+# sample color names for visualization
+# random colors can also be assigned for the same purpose
+
+blue
+green
+red
+cyan
+magenta
+yellow
+black
+white
