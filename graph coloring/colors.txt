@@ -1,11 +1,20 @@
-# sample color names for visualization
-# random colors can also be assigned for the same purpose
-
-blue
 green
 red
+lightblue
 cyan
+lime
+blue
+firebrick
 magenta
+honeydew
+springgreen
+darksalmon
+pink
 yellow
-black
+c
+chartreuse
 white
+black
+
+# sample color names for visualization
+# random colors can also be assigned for the same purpose
