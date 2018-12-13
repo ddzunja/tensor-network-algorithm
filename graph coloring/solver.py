@@ -116,7 +116,7 @@ def local_search(node_count, graph):
         colors = list(range(0, node_count))
         for i in range(node_count):
             colors[i] = random.randint(0, 6)
-        for i in range(12345):
+        for i in range(1234):
             node = max_violator(node_count, graph, colors)
             if node == -1:
                 return colors
@@ -189,7 +189,7 @@ def get_colorable_node(node_count, color, colors, graph):
 
 def bipartite_coloring(node_count, graph):
     best_coloring = range(0, node_count)
-    trials = 5000 / node_count + 10
+    trials = 5000 // node_count + 10
     if trials > 500:
         trials = 500
     for tr in range(trials):
