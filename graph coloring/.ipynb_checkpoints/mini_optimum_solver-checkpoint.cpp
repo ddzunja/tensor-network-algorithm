@@ -84,6 +84,7 @@ void minimize(int &a, int b) {
     }
 }
 
+
 int main(int argv, char** argc) {
     char* filename = argc[1];
     //filename = "./data/gc_4_1";
@@ -130,35 +131,28 @@ int main(int argv, char** argc) {
         }
     }
     for (int i = 0; i < (1 << N); i ++) {
-        parent[i] = -1;
         for (int j = i; j > 0; j = (j - 1) & i) {
             if (independent[j]) {
                 //maximize(maxIndependentSubsets[i], maskBitCount[j]);
                 if (maskBitCount[j] > maxIndependentSubsets[i]) {
                     maxIndependentSubsets[i] = maskBitCount[j];
+                    parent[i] = j;
                 }
             }
         }
     }
-    dp[0] = -1;
+    dp[0] = 0;
     for (int mask = 1; mask < (1 << N); mask ++) { // submask enumeration
         dp[mask] = N + 1;
         for (int sub = mask; sub > 0; sub = (sub - 1) & mask) {
             if (maxIndependentSubsets[mask] == maxIndependentSubsets[sub]
-                && maxIndependentSubsets[sub] == maskBitCount[sub]) {
-                if (1 + dp[mask ^ sub] < dp[mask]) {
-                    dp[mask] = 1 + dp[mask ^ sub];
-                    parent[mask] = sub;
-                }
-            }
-            //dp[mask] = min(dp[mask], 1 + dp[mask ^ sub]);
+                && maxIndependentSubsets[sub] == maskBitCount[sub])
+            dp[mask] = min(dp[mask], 1 + dp[mask ^ sub]);
         }
     }
-    cout << "chromatic number is equal to " << dp[(1 << N) - 1] + 1 << endl;
+    cout << "chromatic number is equal to " << dp[(1 << N) - 1] << endl;
     
-//    for (int i = 0; i < (1 << N); i ++) {
-//        cout << i << " --> " << parent[i] << " " << dp[i] << endl;
-//    }
+    
     // recovering the optimal setting of colors
     
     vector<int> path;
@@ -167,13 +161,12 @@ int main(int argv, char** argc) {
     int activeColor = 0;
     while (current > 0) {
         int activeSet = parent[current];
-        //cout << current << " vs " << activeSet << endl;
         for (int i = 0; i < N; i ++) {
             if (activeSet & (1 << i)) {
                 colors[i] = activeColor;
             }
         }
-        current = current ^ activeSet;
+        current = current ^ parent[current];
         activeColor ++;
     }
     cout << "Assigned colors in optimal coloring is:" << endl;
