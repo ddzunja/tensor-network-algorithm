@@ -65,7 +65,11 @@ int main(int argv, char** argc) {
             }
         }
         if (good && maskBitCount[i] > maxClique) {
+<<<<<<< HEAD
             maxClique = maskBitCount[i];
+=======
+            maxClique = i;
+>>>>>>> origin/master
         }
     }
     printf("Size of the maximum clique of the graph is: %d\n", maxClique);
