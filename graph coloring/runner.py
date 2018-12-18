@@ -74,16 +74,17 @@ def get_max_clique(file):
     f = open("clique_output.txt", "r")
     data = f.read()
     lines = data.split("\n")
-    return int(lines[0].split()[-1])
+    #print(lines)
+    return int(lines[0].split()[-1]), int(lines[1].split()[-1])
 
 def bound_quantum_chromatic_number(file):
     coloring = prepare(file)
-    clique = get_max_clique(file)
+    clique = get_max_clique(file)[0]
     return clique, max(coloring) + 1
 
 def generate_and_bound(n):
     file = "./data/rng_graph.txt"
     G, E = generate_graph_to_file(n)
     coloring = prepare(file)
-    clique = get_max_clique(file)
-    return clique, max(coloring) + 1, E
+    clique = get_max_clique(file)[0]
+    return clique, max(coloring) + 1, E, G
