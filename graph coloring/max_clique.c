@@ -49,7 +49,7 @@ int main(int argv, char** argc) {
             }
         }
     }
-    int maxClique = 0;
+    int maxClique = 0, mask;
     for (int i = 0; i < (1 << N); i ++) {
         int good = 1;
         for (int j = 0; j < N && good; j ++) {
@@ -65,14 +65,12 @@ int main(int argv, char** argc) {
             }
         }
         if (good && maskBitCount[i] > maxClique) {
-<<<<<<< HEAD
             maxClique = maskBitCount[i];
-=======
-            maxClique = i;
->>>>>>> origin/master
+            mask = i;
         }
     }
     printf("Size of the maximum clique of the graph is: %d\n", maxClique);
+    printf("[One] possible mask satisfying maximum clique is: %d\n", mask);
     
     return 0;
 }
