@@ -1,0 +1,14 @@
+chromatic number is equal to 5
+Assigned colors in optimal coloring is:
+color of node 0 is 3
+color of node 1 is 3
+color of node 2 is 1
+color of node 3 is 0
+color of node 4 is 2
+color of node 5 is 0
+color of node 6 is 1
+color of node 7 is 2
+color of node 8 is 1
+color of node 9 is 0
+color of node 10 is 0
+color of node 11 is 4
