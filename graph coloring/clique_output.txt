@@ -1,1 +1,1 @@
-Size of the maximum clique of the graph is: 4
+Size of the maximum clique of the graph is: 2
