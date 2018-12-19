@@ -61,5 +61,10 @@ if __name__ == "__main__":
         Z = TRG_3_rank(K=i, beta=2, D=2, Dcut=6, no_iter=3)
         A = np.append(A,Z)
 
-    plt.figure(figsize=(15,10))
-    plt.plot(B,np.log10(-A))
+    plt.figure(figsize=(8,5))
+    plt.plot(B,np.log10(-A),'-o',label='Tensor renormalization groupe')
+    plt.xlim([0,1.3])
+    plt.legend(fontsize=16)
+    plt.xlabel('Coupling constant',fontsize=18)
+    plt.ylabel('Free energy per unit site',fontsize=18)
+    plt.savefig('TRG_Honeycomb.png')
