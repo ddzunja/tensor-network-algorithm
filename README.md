@@ -24,13 +24,13 @@ As we can see from the partial success of Ising model describing phase transitio
 
 ## Tensor Renormalization Group algorithm
 
-- Choose Honeycomb lattice network
-- Calculate Hamiltonian
-- Geometrical replacement of tensors
-- Using SVD decomposition
-- Reducing rank
-- Merging
-- Calculating energy
+    - Choose Honeycomb lattice network
+    - Calculate Hamiltonian
+    - Geometrical replacement of tensors
+    - Using SVD decomposition
+    - Reducing rank
+    - Merging
+    - Calculating energy
 
 
 ## Participitants(Skoltech 2018-NLA-14)
