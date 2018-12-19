@@ -1,17 +1,5 @@
-# Tensor-network-algorithms
+# Tensor Network Algorithms
 As we can see from the partial success of Ising model describing phase transition, chains which composed of combinatorial objects and sites are important. In this project, we implement basic tensor network algorithms.
-
-## Graph algorithm
-
-## Renormalization Group algorithm
-
-## Participitants(Skoltech 2018-NLA-14)
-Mahmud Allahverdiyev - Data Science Msc. 1st year student
-Dejan Dzunja - Data Science Msc. 1st year student
-Mohammad Ali Sadri - Data Science Msc. 1st year student
-Woong-seon - Data Science Msc. 1st year student
-
-
 
 ## Implementation of graph coloring based on heuristic methods in Python
     The following methods have been used:
@@ -33,3 +21,23 @@ Woong-seon - Data Science Msc. 1st year student
     - Linear time algorithm to check if chromatic number is 2
     - Depth search routines are used to verify bipartiteness of the graph
     - The outlining method can be replaced by BFS alsgorithm as well.
+
+## Tensor Renormalization Group algorithm
+
+- Choose Honeycomb lattice network
+- Calculate Hamiltonian
+- Geometrical replacement of tensors
+- Using SVD decomposition
+- Reducing rank
+- Merging
+- Calculating energy
+
+
+## Participitants(Skoltech 2018-NLA-14)
+- Mahmud Allahverdiyev - Data Science Msc. 1st year student
+- Dejan Dzunja - Data Science Msc. 1st year student
+- Mohammad Ali Sadri - Data Science Msc. 1st year student
+- Woong-seon - Data Science Msc. 1st year student
+
+
+
