@@ -1,2 +1,2 @@
-Size of the maximum clique of the graph is: 5
-[One] possible mask satisfying maximum clique is: 8245
+Size of the maximum clique of the graph is: 4
+[One] possible mask satisfying maximum clique is: 159744
