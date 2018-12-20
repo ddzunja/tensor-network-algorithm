@@ -47,8 +47,7 @@ def TRG_3_rank(K, beta , D, Dcut, no_iter):
 
         Z = 0
         for i, j, k in product (inds , inds , inds):
-            Z += T_a[i][j][k]
-            Z += T_b[i][j][k]
+            Z += T_a[i][j][k]*T_b[i][j][k]
 
         return Z
 
