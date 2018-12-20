@@ -61,7 +61,7 @@ if __name__ == "__main__":
         A = np.append(A,Z)
 
     plt.figure(figsize=(8,5))
-    plt.plot(B,np.log10(-A),'-o',label='Tensor renormalization group')
+    plt.plot(B,np.log10(A),'-o',label='Tensor renormalization group')
 #    plt.xlim([0,1.3])
     plt.legend(fontsize=16)
     plt.xlabel('Coupling constant',fontsize=18)
