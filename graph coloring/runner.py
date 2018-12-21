@@ -88,3 +88,27 @@ def generate_and_bound(n):
     coloring = prepare(file)
     clique = get_max_clique(file)[0]
     return clique, max(coloring) + 1, E, G
+
+def get_laplacian(graph_file):
+    f = open(graph_file)
+    graph_data = f.read()
+    f.close()
+    original = graph_data.split("\n")
+    n, m = map(int, original[0].split(' '))
+    G = np.zeros((n, n))
+    for i in range(1, len(original) - 1):
+        chunk = original[i]
+        u, v = map(int, chunk.split(' '))
+        G[u, v] = G[v, u] = 1
+    L = np.zeros((n, n))
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                L[i, j] = np.sum(G[i], axis=0)
+            elif G[i, j] == 1:
+                L[i, j] = -1
+            else:
+                L[i, j] = 1
+    return L.astype(int)
+
+    
