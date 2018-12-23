@@ -1,5 +1,5 @@
 # Tensor Network Algorithms
-As we can see from the partial success of Ising model describing phase transition, chains which composed of combinatorial objects and sites are important. In this project, we implement basic tensor network algorithms.
+As we can see from the partial success of Ising model describing phase transition, chains which composed of combinatorial objects and sites are important. In this project, we implement basic tensor network algorithms.The graph coloring visualizations and calculations over Hoffman bounding is done in the file named "Graph visualization.ipynb".
 
 ## Implementation of graph coloring based on heuristic methods in Python
     The following methods have been used:
