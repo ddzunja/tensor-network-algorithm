@@ -46,7 +46,7 @@ As we can see from the partial success of Ising model describing phase transitio
 - Mahmud Allahverdiyev - Data Science Msc. 1st year student
 - Dejan Dzunja - Data Science Msc. 1st year student
 - Mohammad Ali Sadri - Data Science Msc. 1st year student
-- Woong-seon - Data Science Msc. 1st year student
+- Woongseon Yoo - Data Science Msc. 1st year student
 
 
 
