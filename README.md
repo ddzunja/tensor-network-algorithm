@@ -40,6 +40,12 @@ As we can see from the partial success of Ising model describing phase transitio
     - Reducing rank
     - Merging
     - Calculating energy
+    - To compute TRG with different parameters you can find:
+        - TRG/TRG.py for square latice network
+        - TRG/TRG_Honey_comb.py for honeycomb latice network
+    - You can also find information on these networks and parameter from:
+        - paper/CookCaleb.pdf for square latice network
+        - paper/TRG_approach_to_2D_classical_lattice_models.pdf for honeycomb latice network
 
 
 ## Participitants(Skoltech 2018-NLA-14)
